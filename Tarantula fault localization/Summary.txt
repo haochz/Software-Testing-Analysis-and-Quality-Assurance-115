@@ -1,0 +1,33 @@
+Summary
+Haochen_Zhou-23567813
+assigned bug: Math 19
+
+After executing “defects4j export -p tests.relevant” command, I got one relevant test suit with 25 tests including 1 failing tests and 24 passing tests. Then, I executed “defects4j coverage -t” command for all passing tests, hits=0 for all these tests. At the same time, I executed the same command for my failing test and got all line numbers which have hits. 
+
+According to the Tarantula Approach, I calculated the suspiciousness score for each line. As a result, I got that the suspiciousness score for each line is 1. All lines are highly suspicious. By comparing these highly suspicious lines with lines are modified, I did not find any relation between them. Besides, actual buggy lines do not seem to match with my highly suspicious lines but some of buggy lines have hit which is equal to 0. 
+
+
+
+
+Lines are modified:
+command I used: 
+diff math_19_buggy/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java math_19_fixed/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
+
+
+>                 for (int i = 0; i < lB.length; i++) {
+>                     if (Double.isInfinite(boundaries[1][i] - boundaries[0][i])) {
+>                         final double max = Double.MAX_VALUE + boundaries[0][i];
+>                         final NumberIsTooLargeException e
+>                             = new NumberIsTooLargeException(boundaries[1][i],
+>                                                             max,
+>                                                             true);
+>                         e.getContext().addMessage(LocalizedFormats.OVERFLOW);
+>                         e.getContext().addMessage(LocalizedFormats.INDEX, i);
+> 
+>                         throw e;
+>                     }
+>                 }
+
+
+
+
