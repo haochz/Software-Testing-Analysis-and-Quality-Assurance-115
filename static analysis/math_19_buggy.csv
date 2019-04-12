@@ -1,0 +1,10 @@
+Project,bugid,filename,line number,Full warning text
+Math,19,/lv_scratch/tmp/math_19_buggy/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java,31,Avoid unused imports such as 'org.apache.commons.math3.exception.util.LocalizedFormats'
+Math,19,/lv_scratch/tmp/math_19_buggy/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java,175,Perhaps 'logMu2' could be replaced by a local variable.
+Math,19,/lv_scratch/tmp/math_19_buggy/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java,228,Perhaps 'historySize' could be replaced by a local variable.
+Math,19,/lv_scratch/tmp/math_19_buggy/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java,671,Avoid unused method parameters such as 'xold'.
+Math,19,/lv_scratch/tmp/math_19_buggy/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java,679,Useless parentheses.
+Math,19,/lv_scratch/tmp/math_19_buggy/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java,742,The local variable name 'Cneg' doesn't match '[a-z][a-zA-Z0-9]*'
+Math,19,/lv_scratch/tmp/math_19_buggy/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java,976,This for loop can be replaced by a foreach loop
+Math,19,/lv_scratch/tmp/math_19_buggy/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java,1296,This for loop can be replaced by a foreach loop
+Math,19,/lv_scratch/tmp/math_19_buggy/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java,1310,This for loop can be replaced by a foreach loop

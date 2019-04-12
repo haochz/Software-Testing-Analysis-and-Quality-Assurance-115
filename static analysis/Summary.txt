@@ -1,0 +1,60 @@
+
+Haochen_Zhou-Summary
+
+assigned bug: Math 19
+tool: PMD
+a. 
+In the buggy version of the file, there are two test cases fail. One is testBoundaryRangeTooLarge and another is checkMissingFastMathClasses. However, in the fixed version of the file, there is only one test case fails that is checkMissingFastMathClasses. We can find that the failing test about the boundary range does not exist in the project. 
+
+
+b.
+Summary for Bug: Math-19
+--------------------------------------------------------------------------------
+Revision ID (fixed version):
+c73fad0a0d42103b5e13a68317ea95b1090263ba
+--------------------------------------------------------------------------------
+Revision date (fixed version):
+2012-09-21 15:32:18 +0000
+--------------------------------------------------------------------------------
+Root cause in triggering tests:
+ - org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testBoundaryRangeTooLarge
+   --> java.lang.Exception: Unexpected exception, expected<org.apache.commons.math3.exception.NumberIsTooLargeException> but was<org.apache.commons.math3.exception.MathIllegalStateException>
+--------------------------------------------------------------------------------
+List of modified sources:
+ - org.apache.commons.math3.optimization.direct.CMAESOptimizer
+--------------------------------------------------------------------------------
+
+
+The summary provided by the defects4j tool firstly defines a specific bug, Math-19. Then, according to the part of the “Root cause in triggering tests”, we can find which test cases failed when running the program. In CMAESOptimizerTest which is a test project, the function of testBoundaryRangeTooLarge detect a bug about unexpected exception. The test case failed. The project actually should throw <org.apache.commons.math3.exception.NumberIsTooLargeException>; However, it threw a wrong one that is <org.apache.commons.math3.exception.MathIllegalStateException>. Finally, we know that there are problems in the CMAESOptimizer.java project. 
+
+
+c.
+buggy:
+Running ant (compile.tests)................................................ OK
+Running ant (run.dev.tests)................................................ OK
+Failing tests: 2
+  - org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testBoundaryRangeTooLarge
+  - org.apache.commons.math3.util.FastMathTest::checkMissingFastMathClasses
+
+fixed:
+Running ant (compile.tests)................................................ OK
+Running ant (run.dev.tests)................................................ OK
+Failing tests: 1
+  - org.apache.commons.math3.util.FastMathTest::checkMissingFastMathClasses
+
+
+After running defects4j test command, we can find that there are two test cases failed in the buggy version. One is in the function of the testBoundaryRangeTooLarge. It indicates that in CMAESOptimizer.java project, there will be a problem about the boundary range. Besides, another test case which aims to check missing fast math classes also failed. Beyond that, in the fixed version, there is only one failing test and another problem does not exist in that version. From the triggering tests, we can see that what kinds of problems do we have and detected. 
+
+
+d. 
+By using the “quickstart.xml” based on PMD, the output of the buggy version reports 9 problems. Then, in the output of the fixed version, the problems have been reduced to 8. The problems in the fixed version are less than that in the buggy version. At the same time, a problem that described as “Avoid unused imports such as 'org.apache.commons.math3.exception.util.LocalizedFormats’” in line 31 of the buggy output disappeared in the fixed output. Hence, the infer can successfully detect a bug in the buggy version. However, according to the triggering tests, the problem is about the unexpected exception for the boundary range, yet “LocalizedFormats” described in line 31 does not seem to relate to the unexpected exception. So, PMD does not find the key fault. 
+
+
+
+—————Intuition————
+Even though LocalizedFormats seems not directly relate to boundaryRangeTooLarge, we cannot exclude the possibility that there is a relation between the two functions in other reasons. LocalizedFormats may indirectly relate to boundaryRangeTooLarge and thus, PMD actually find the fault.
+
+
+
+
+
